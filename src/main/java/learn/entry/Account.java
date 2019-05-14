@@ -11,6 +11,15 @@ public class Account {
     private String sex;
 
     public static void main(String[] args) {
+
+        Object i = 5/10;
+        if(i instanceof  Integer)
+            System.out.println(String.format("计算结果为整型，值为：%d",i));
+
+
+        double a = new Double(5)/10;
+        System.out.println(a);
+
         Class<Account> clazz = Account.class;
 
         Log log = clazz.getAnnotation(Log.class);

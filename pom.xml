@@ -10,6 +10,7 @@
 
 	<properties>
 		<axis2.version>1.7.4</axis2.version>
+		<spring.security.version>5.2.0.BUILD-SNAPSHOT</spring.security.version>
 	</properties>
 
 	<!-- Inherit defaults from Spring Boot -->
@@ -28,11 +29,8 @@
 
 		<!-- ... other dependency elements ... -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-bom</artifactId>
-			<version>5.2.0.BUILD-SNAPSHOT</version>
-			<type>pom</type>
-			<scope>import</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
