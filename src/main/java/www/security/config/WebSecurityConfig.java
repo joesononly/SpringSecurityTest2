@@ -1,61 +1,55 @@
 package www.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import org.springframework.context.annotation.*;
-import org.springframework.security.config.annotation.authentication.builders.*;
-import org.springframework.security.config.annotation.web.configuration.*;
-import www.security.Service.SecurityUserDetailService;
-import www.security.encry.SecurityEncoder;
+import www.security.encryp.SecurityEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    SecurityUserDetailService userDetailsService;
 
     protected void configure(HttpSecurity http) throws Exception{
         /*
         * Created by:joeson
-        * Created:20190517
-        * Comment:设置URL权限管理
+        * Created:201905151934
+        * Comment:管理权限的分配
         * */
-        //取消跨域验证
         http.csrf().disable();
-        //设置需要认证的URL
-        http.authorizeRequests().antMatchers("/admin").hasRole("USER");
-        //设置登录校验的相关url
-        http.formLogin().loginProcessingUrl("/loginCheck").loginPage("/login").failureUrl("/error");
-        //设置放行其他URL
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/index/**","/**").permitAll()
+        .and()
+        .formLogin().loginProcessingUrl("/j_spring_security_check").loginPage("/login").failureUrl("/loginError");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         /*
         * Created by:joeson
-        * Created:201905171013
-        * Comment:设置验证用户的DAO类，以及密码加密类
+        * Created:20190515
+        * Comment:构建认证类，添加用户的DAO类作为依赖，用于后面通过用户名查询用户信息
         * */
-        super.configure(auth);
-        auth.userDetailsService(userDetailsService).passwordEncoder(new SecurityEncoder());
+        auth.userDetailsService(userDetailsService()).passwordEncoder(new SecurityEncoder());
     }
 
-    /*
     @Bean
     public UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("joeson").password("joeson").roles("USER").build());
-        return manager;
-    }*/
+        /*
+        * Created by:joeson
+        * Created:201905151941
+        * Comment:用户DAO类，用于通过用户名查询用户信息
+        * */
+        InMemoryUserDetailsManager userManager = new InMemoryUserDetailsManager();
+        userManager.createUser(User.withUsername("joeson").password("joeson").roles("ADMIN").build());
+        return userManager;
+    }
 
 }

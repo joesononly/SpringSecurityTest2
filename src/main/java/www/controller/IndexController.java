@@ -20,4 +20,9 @@ public class IndexController {
         System.out.println("login");
         return "index";
     }
+
+    @RequestMapping("/test")
+    public String test(){
+        return "test";
+    }
 }

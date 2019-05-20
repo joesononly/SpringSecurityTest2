@@ -1,6 +1,14 @@
 package www.service.permision.mapper;
 
-public interface ResposibilityMapper {
+import org.springframework.stereotype.Component;
+import www.bean.Responsibility;
 
-    public void insert();
+import java.util.List;
+
+public interface ResposibilityMapper {
+    public void insert(Responsibility responsibility);
+
+    public void delete(Responsibility responsibility);
+
+    public List<Responsibility> select(Responsibility responsibility);
 }

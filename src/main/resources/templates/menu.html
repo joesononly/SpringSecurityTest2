@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理 - 菜单</title>
+    <!--公共js-->
+    <script src="/javascript/jquery-3.4.1.min.js"></script>
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--bootstrap table-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table-locale-all.min.js"></script>
+
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!--菜单列表-->
+            <table id="menu-list"
+                   data-locale="zh-CN"
+                   data-toggle="table"
+                   data-height="460"
+                   data-pagination="true"
+                   data-search="true"
+                   data-sort-stable="true"
+                   data-page-size="3">
+                <thead>
+                <tr>
+                    <th data-field="name" data-width="150">菜单标题</th>
+                    <th data-field="view.name" data-width="350">视图</th>
+                    <th data-field="parent.name" data-width="150">父菜单</th>
+                    <th data-field="level" data-width="50">序号</th>
+                    <th data-field="comment" data-width="450">备注</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
