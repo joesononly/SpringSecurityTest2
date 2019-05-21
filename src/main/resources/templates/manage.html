@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理系统</title>
+    <!--公共js-->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+    <!--bootstrap-->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" >
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+
+    <!--bootstrap table-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table-locale-all.min.js"></script>
+
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <!--局部样式-->
+    <style>
+        .container{
+            margin: 0px;
+            padding: 0px;
+        }
+        .menu{
+            height: 45px;
+            padding: 0px;
+        }
+        .menu > .menu-item{
+            width: 100%;
+            height: 100%;
+            line-height: 45px;
+            text-align: center;
+            color: #fff;
+            background-color: #6f5499;
+            list-style:none;
+        }
+
+    </style>
+
+    <script>
+        var $table = $('#menu-list');
+        window.operateEvents = {
+            'click #addView': function (e, value, row, index) {
+                alert('You click like action, row: ' + JSON.stringify(row))
+            },
+            'click .remove': function (e, value, row, index) {
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: [row.id]
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="menu">
+                <li class="menu-item">管理 - 菜单</li>
+                <li class="menu-item">管理 - 职责</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -30,6 +30,23 @@
         .add{
 
         }
+
+        input:hover{
+            background: #f5f5f5;
+            outline: none;
+        }
+        input:focus{
+            background: #f5f5f5;
+            outline: none;
+        }
+
+        .no-padding{
+            /*padding: 0px !important;*/
+        }
+        .no-padding > input{
+            border:none;
+            background-color:  transparent;
+        }
     </style>
 
     <script>
@@ -71,8 +88,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="text" value="管理 - 菜单"></td>
+                    <tr class="table-active">
+                        <td class="no-padding"><input type="text" value="管理 - 菜单"></td>
                         <td><div class="chose-box">/menu<span id="addView" style="float:right" class="glyphicon glyphicon-th-list add"></span></div></td>
                         <td><div class="chose-box">管理 - 视图<span style="float:right" class="glyphicon glyphicon-th-list"></span></div></td>
                         <td>1</td>
