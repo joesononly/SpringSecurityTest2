@@ -37,4 +37,24 @@
         </if>
     </select>
 
+    <update id="update" parameterType="www.bean.Responsibility">
+        UPDATE  S_RESP SET 1 = 1
+        <if test="lastUpBy!=null">
+            ,LAST_UP_BY = #{lastUpBy}
+        </if>
+        <if test="lastUpDate!=null">
+            ,LAST_UP_DATE = #{lastUpDate}
+        </if>
+        <if test="updateVersion!=null">
+            ,UPDATE_VERSION = #{updateVersion}
+        </if>
+        <if test="name!=null">
+            ,NAME = #{name}
+        </if>
+        <if test="comment!=null">
+            ,COMMENT = #{comment}
+        </if>
+        WHERE ID = #{id}
+    </update>
+
 </mapper>

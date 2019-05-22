@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="www.service.manage.mapper.MenuMapper">
+
+    <resultMap type="www.bean.View" id="view">
+        <id property="id" column="id" />
+        <result property="created" column="created"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="lastUpdate" column="last_up_date"/>
+        <result property="lastUpBy" column="Last_up_by"/>
+        <result property="name" column="name"/>
+        <result property="comment" column="comment"/>
+        <result property="url" column="url"/>
+    </resultMap>
+
+    <insert id="insert" >
+        INSERT INTO S_VIEW (
+            CREATED,
+            CREATED_BY,
+            LAST_UP_DATE,
+            LAST_UP_BY,
+            UPDATE_VERSION,
+            NAME,
+            COMMENT,
+            url
+        )
+        VALUES
+        (
+            SYSDATE(),
+            #{createdBy},
+            SYSDATE(),
+            #{lastUpBy},
+            1,
+            #{name},
+            #{comment},
+            #{url}
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM S_VIEW WHERE 1 = 1
+        <if test="id != null">
+            AND ID = #{id}
+        </if>
+    </delete>
+
+    <select id="select" parameterType="www.bean.Menu" resultMap="menu">
+        SELECT  * FROM S_VIEW WHERE 1=1
+        <if test="id != null">
+            AND ID = #{id}
+        </if>
+    </select>
+
+</mapper>
