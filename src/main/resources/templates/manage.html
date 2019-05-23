@@ -29,43 +29,78 @@
             padding: 0px;
         }
         .menu{
-            height: 45px;
+            height: auto;
             padding: 0px;
+            background-color: #333;
         }
         .menu > .menu-item{
             width: 100%;
-            height: 100%;
+            height: 45px;
+            line-height: 45px;
+            color: rgb(191, 203, 217);
+            background-color: rgb(48, 65, 86);
+            list-style:none;
+            cursor: pointer;
+        }
+
+        .menu > .active{
+            animation-name:toggleTranlate;
+            animation-duration:1s;
+            animation-timing-function:linear;
+            animation-play-state:running;
+            animation-fill-mode:forwards;
+            height: 45px;
+        }
+        
+        @keyframes toggleTranlate {
+            from {height: 45px;}
+            to {height: auto
+            ;}
+
+        }
+
+        .menu > .menu-item > span{
+            padding: 0px 15px 0px 15px;
+        }
+
+        .menu-child{
+            height: auto;
+            padding: 0px;
+            background-color: #333;
+        }
+
+        .menu-child > .menu-item{
+            width: 100%;
+            height: 45px;
             line-height: 45px;
             text-align: center;
-            color: #fff;
-            background-color: #6f5499;
+            color: rgb(191, 203, 217);
+            background-color: #1f2d3d!important;
             list-style:none;
+            cursor: pointer;
+        }
+
+        .menu-child > .menu-item:hover{
+            background-color: #001528!important;
         }
 
     </style>
 
-    <script>
-        var $table = $('#menu-list');
-        window.operateEvents = {
-            'click #addView': function (e, value, row, index) {
-                alert('You click like action, row: ' + JSON.stringify(row))
-            },
-            'click .remove': function (e, value, row, index) {
-                $table.bootstrapTable('remove', {
-                    field: 'id',
-                    values: [row.id]
-                })
-            }
-        }
-    </script>
+
 </head>
 <body>
-<div class="container">
+<div class="container" id="app">
     <div class="row">
-        <div class="col-md-3">
-            <ul class="menu">
-                <li class="menu-item">管理 - 菜单</li>
-                <li class="menu-item">管理 - 职责</li>
+        <div class="col-md-2">
+            <ul class="nav menu" id="verticalNav">
+
+                <li class="menu-item" v-for="menu in menus" v-on:click="showMenu(menu)" v-bind:class="menu.toggle">
+                    <span v-bind:class="menu.class"></span> {{menu.view.name}}
+                    <ul class="menu-child" >
+                        <li class="menu-item" v-for="menuChild in menu.menuChilds">{{menuChild.view.name}}</li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </div>
@@ -73,4 +108,47 @@
 
 
 </body>
+<script>
+    var $table = $('#menu-list');
+    window.operateEvents = {
+        'click #addView': function (e, value, row, index) {
+            alert('You click like action, row: ' + JSON.stringify(row))
+        },
+        'click .remove': function (e, value, row, index) {
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: [row.id]
+            })
+        }
+    }
+    $(function () {
+        var clientHeight = document.body.offsetWidth;
+
+        var currentHeight = $("#verticalNav").height(clientHeight);
+
+        console.log(clientHeight);
+    })
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            menus:[
+                {
+                    view:{name:"管理 - 菜单"},
+                    class:"glyphicon glyphicon-user",
+                    toggle:"active",
+                    menuChilds:[
+                        {view:{name:"菜单"}}
+                    ]
+                },
+                {view:{name:"管理 - 职责"},class:"glyphicon glyphicon-list"}
+                ]
+        },
+        methods:{
+            showMenu:function(e){
+                console.log(e.target);
+            }
+        }
+    });
+</script>
 </html>

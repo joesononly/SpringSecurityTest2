@@ -1,8 +1,6 @@
 package www.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /*
 * Created by:joeson
@@ -20,18 +18,14 @@ public class Menu extends Base {
     @Column(length = 500)
     private String comment;
 
-    //关联的视图Id
-    @Column
-    private Integer viewId;
-
     //关联的视图
+    @OneToOne
+    @JoinColumn(name = "viewId",referencedColumnName = "id")
     private View views;
 
-    //父菜单Id
-    @Column
-    private String parentId;
-
     //父菜单
+    @OneToOne
+    @JoinColumn(name = "parentId",referencedColumnName = "id")
     private Menu parent;
 
     //同级菜单序号
@@ -54,28 +48,12 @@ public class Menu extends Base {
         this.comment = comment;
     }
 
-    public Integer getViewId() {
-        return viewId;
-    }
-
-    public void setViewId(Integer viewId) {
-        this.viewId = viewId;
-    }
-
     public View getViews() {
         return views;
     }
 
     public void setViews(View views) {
         this.views = views;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
     }
 
     public Integer getLevel() {

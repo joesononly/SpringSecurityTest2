@@ -41,6 +41,17 @@ public class Base {
     //修改版本号
     @Column
     private Integer updateVersion;
+    //排序方式
+    private String sequence;
+
+
+    public String getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
+    }
 
     public Integer getId() {
         return id;
