@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import www.bean.Menu;
 import www.service.OperateService;
-import www.service.manage.mapper.MenuMapper;
+import www.mapper.MenuMapper;
 
 import java.util.List;
 /*

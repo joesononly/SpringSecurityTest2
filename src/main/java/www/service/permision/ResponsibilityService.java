@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import www.bean.Responsibility;
 import www.service.OperateService;
-import www.service.permision.mapper.ResposibilityMapper;
+import www.mapper.ResposibilityMapper;
 
 import java.util.List;
 

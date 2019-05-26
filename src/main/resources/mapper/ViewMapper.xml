@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="www.service.manage.mapper.ViewMapper">
+<mapper namespace="www.mapper.ViewMapper">
 
     <resultMap type="www.bean.View" id="view">
         <id property="id" column="id" />
@@ -11,6 +11,10 @@
         <result property="name" column="name"/>
         <result property="comment" column="comment"/>
         <result property="url" column="url"/>
+        <collection property="responsibilities" ofType="www.bean.Responsibility">
+            <id property="id" column="RESP_ID"/>
+            <result property="name" column="RESP_NAME"/>
+        </collection>
     </resultMap>
 
     <insert id="insert" >
@@ -44,11 +48,19 @@
         </if>
     </delete>
 
-    <select id="select" parameterType="www.bean.Menu" resultMap="menu">
+    <select id="select" parameterType="www.bean.View" resultMap="view">
         SELECT  * FROM S_VIEW WHERE 1=1
         <if test="id != null">
             AND ID = #{id}
         </if>
+    </select>
+
+    <select id="findResponsibilitysByViewName" parameterType="www.bean.View" resultType="www.bean.Responsibility">
+        SELECT T3.* FROM S_VIEW T1 LEFT JOIN S_RESP_VIEW T2 ON T1.ID = T2.VIEW_ID LEFT JOIN S_RESP T3 ON T2.RESPONSIBILITY_ID = T3.ID WHERE T1.NAKE = #{name}
+    </select>
+
+    <select id="findAllViewAndResponsibility" parameterType="www.bean.View" resultMap="view">
+        SELECT T1.*,T3.ID AS RESP_ID,T3.NAME AS RESP_NAME FROM S_VIEW T1 LEFT JOIN S_RESP_VIEW T2 ON T1.ID = T2.VIEW_ID LEFT JOIN S_RESP T3 ON T2.RESPONSIBILITY_ID = T3.ID
     </select>
 
 </mapper>

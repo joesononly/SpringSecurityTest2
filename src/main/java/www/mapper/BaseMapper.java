@@ -1,4 +1,4 @@
-package www.service;
+package www.mapper;
 
 import java.util.List;
 

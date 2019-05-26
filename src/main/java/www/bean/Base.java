@@ -32,7 +32,7 @@ public class Base {
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") //set
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")//get
-    private String lastUpdate;
+    private Date lastUpdate;
 
     //修改人Id
     @Column
@@ -41,15 +41,24 @@ public class Base {
     //修改版本号
     @Column
     private Integer updateVersion;
+
     //排序方式
-    private String sequence;
+    @Transient
+    private Integer sequence;
 
+    //接受查询条件
+    @Transient
+    private String search;
 
-    public String getSequence() {
+    //接受排序方式
+    @Transient
+    private String sortOrder;
+
+    public Integer getSequence() {
         return sequence;
     }
 
-    public void setSequence(String sequence) {
+    public void setSequence(Integer sequence) {
         this.sequence = sequence;
     }
 
@@ -77,11 +86,11 @@ public class Base {
         this.createdBy = createdBy;
     }
 
-    public String getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(String lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -99,5 +108,21 @@ public class Base {
 
     public void setUpdateVersion(Integer updateVersion) {
         this.updateVersion = updateVersion;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

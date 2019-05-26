@@ -1,8 +1,7 @@
 package www.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /*
 * Created by:zjh
@@ -23,6 +22,9 @@ public class View extends Base {
     //备注
     @Column(length = 500)
     private String comment;
+
+    @Transient
+    private List<Responsibility> responsibilities;
 
     public String getUrl() {
         return url;
@@ -46,5 +48,13 @@ public class View extends Base {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public List<Responsibility> getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(List<Responsibility> responsibilities) {
+        this.responsibilities = responsibilities;
     }
 }

@@ -1,7 +1,6 @@
-package www.service.manage.mapper;
+package www.mapper;
 
 import www.bean.Menu;
-import www.service.BaseMapper;
 
 
 public interface MenuMapper extends  BaseMapper<Menu>{

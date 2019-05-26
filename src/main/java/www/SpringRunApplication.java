@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan("www.service.*.mapper")
+@MapperScan("www.mapper")
 public class SpringRunApplication<main> {
 
     public static  void main(String[] args){
