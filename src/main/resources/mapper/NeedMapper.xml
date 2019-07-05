@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="www.mapper.NeedMapper">
+
+    <resultMap type="www.bean.Need" id="need">
+        <id property="id" column="id" />
+        <result property="sequence" column="sequence"/>
+        <result property="created" column="created"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="lastUpdate" column="last_up_date"/>
+        <result property="lastUpBy" column="Last_up_by"/>
+        <result property="title" column="title"/>
+        <result property="businessResponsibilityId" column="bus_resp_id"/>
+        <result property="technologyResponsibilityId" column="tech_resp_id"/>
+        <result property="relevanceObjectCount" column="re_obj_count"/>
+        <result property="status" column="status"/>
+        <result property="runnedTime" column="runned_time"/>
+    </resultMap>
+
+    <resultMap id="needObject" type="www.bean.NeedObject">
+
+    </resultMap>
+
+    <insert id="insert" >
+        INSERT INTO S_NEED (
+            CREATED,
+            CREATED_BY,
+            LAST_UP_DATE,
+            LAST_UP_BY,
+            UPDATE_VERSION,
+            TITLE,
+            BUS_RESP_ID,
+            TECH_RESP_ID,
+            STATUS,
+            RUNNED_TIME
+        )
+        VALUES
+        (
+            SYSDATE(),
+            #{createdBy},
+            SYSDATE(),
+            #{lastUpBy},
+            1,
+            #{title},
+            #{businessResponsibilityId},
+            #{technologyResponsibilityId},
+            #{status},
+            #{runnedTime}
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM S_NEED WHERE 1 = 1
+        <if test="id != null">
+            AND ID = #{id}
+        </if>
+    </delete>
+
+    <select id="select" parameterType="www.bean.Need" resultMap="need">
+        SELECT  * FROM S_NEED WHERE 1=1
+        <if test="id != null">
+            AND ID = #{id}
+        </if>
+    </select>
+
+    <select id="selectNeedObject" parameterType="www.bean.NeedObject" resultType="www.bean.NeedObject">
+        SELECT  * FROM S_NEED_OBJ WHERE NEED_ID = #{needId}
+    </select>
+
+</mapper>
